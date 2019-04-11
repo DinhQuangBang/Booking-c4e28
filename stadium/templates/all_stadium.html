@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+{% for all_stadiums in all_stadium %}
+    {% if all_stadiums.stadium_district == "Hai Bà Trưng" %}
+        <h1>Quận {{ all_stadiums.stadium_district }}</h1>
+        <b>Ten:</b> {{all_stadiums.stadium_name }} <br>
+        <b>dia chi:</b> {{all_stadiums.stadium_address }} <br>
+        <b>anh:</b> <img src="{{ all_stadiums.stadium_image }}"> <br>
+        <a href="/san-bong/detail/{{ all_stadiums._id }}"><button> chi tiết </button></a> <br>
+    {% elif all_stadiums.stadium_district == "Thanh Xuân" %}
+        <h1>Quận {{ all_stadiums.stadium_district }}</h1>
+        <b>Ten:</b> {{all_stadiums.stadium_name }} <br>
+        <b>dia chi:</b> {{all_stadiums.stadium_address }} <br>
+        <b>anh:</b> <img src="{{ all_stadiums.stadium_image }}"> <br>
+        <a href="/san-bong/detail/{{ all_stadiums._id }}"><button> chi tiết </button></a> <br>
+    {% elif all_stadiums.stadium_district == "Cầu Giấy" %}
+        <h1>Quận {{ all_stadiums.stadium_district }}</h1>
+        <b>Ten:</b> {{all_stadiums.stadium_name }} <br>
+        <b>dia chi:</b> {{all_stadiums.stadium_address }} <br> 
+        <b>anh:</b> <img src="{{ all_stadiums.stadium_image }}"> <br>
+        <a href="/san-bong/detail/{{ all_stadiums._id }}"><button> chi tiết </button></a> <br>
+    {% elif all_stadiums.stadium_district == "Nam Từ Liêm" %} 
+        <h1>Quận {{ all_stadiums.stadium_district }}</h1>
+        <b>Ten:</b> {{all_stadiums.stadium_name }} <br>
+        <b>dia chi:</b> {{all_stadiums.stadium_address }} <br>
+        <b>anh:</b> <img src="{{ all_stadiums.stadium_image }}"> <br>
+        <a href="/san-bong/detail/{{ all_stadiums._id }}"><button> chi tiết </button></a> <br>
+    {% endif %}
+{% endfor %}
+
+</body>
+</html>
+
