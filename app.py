@@ -24,7 +24,7 @@ def detail_stadium(stadium_district,id):
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     return render_template("detail_stadium.html", detail_stadium = detail_stadium)
 
-app.route("/dat-san", methods = ["GET","POST"])
+@app.route("/dat-san", methods = ["GET","POST"])
 def booking_form():
     if request.method == "GET":
         return render_template("booking_form.html")
