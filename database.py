@@ -5,6 +5,10 @@ form_database = client.submitted_form
 form_collection = form_database["form"]
 stadium_database = client.stadium_database
 stadium_collection = stadium_database["stadium_detail"]
+
+user_database = client.user_database
+user_collection = user_database["user_information"]
+
 detail = [
     {
         'stadium_district':	'Hai Bà Trưng',
