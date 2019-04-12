@@ -1,6 +1,7 @@
 from flask import *
-from database import stadium_collection, user_collection
+from database import stadium_collection, user_collection, form_collection
 from bson.objectid import ObjectId
+from def_function import *
 
 app = Flask(__name__)
 
@@ -24,17 +25,37 @@ def detail_stadium(stadium_district,id):
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     return render_template("detail_stadium.html", detail_stadium = detail_stadium)
 
-@app.route("/dat-san/<id>", methods = ["GET","POST"])
+@app.route("/dang-ky-dat-san/<id>", methods = ["GET","POST"])
 def booking_form(id):
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     if request.method == "GET":
         return render_template("booking_form.html", detail_stadium = detail_stadium)
     elif request.method == "POST":
         form = request.form
-        customer_name = form['name']
-        customer_phone = form['phone']
-        customer_email = form['email']
-        return redirect("detail_stadium.html")
+        customer_name = form["customer_name"]
+        customer_phone = form["customer_phone"]
+        customer_email = form["customer_email"]
+        stadium_district = detail_stadium["stadium_district"]
+        stadium_name = detail_stadium["stadium_name"]
+        book_date = form["book_date"]
+        book_time = form["book_time"]
+        stadium_price = form["stadium_price"]
+        stadium_email = detail_stadium["stadium_email"]
+        new_form = {
+            "customer_name": customer_name,
+            "customer_phone": customer_phone,
+            "customer_email": customer_email,
+            "stadium_district": stadium_district,
+            "stadium_name": stadium_name,
+            "book_date": book_date,
+            "book_time": book_time,
+            "stadium_price": stadium_price
+        }
+        form_collection.insert_one(new_form)
+        send_mail(customer_name, customer_phone, customer_email, stadium_district, stadium_name,stadium_email, book_date, book_time)
+
+        return redirect("/dang-ky-thanh-cong")
+
     
 @app.route("/dang-nhap", methods = ["GET","POST"])
 def login():
