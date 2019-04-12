@@ -7,7 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-
+{% if all_stadium[0].stadium_district == "Hai Bà Trưng" %}
+    <h1>Quận Hai Bà Trưng</h1>
+{% elif all_stadium[0].stadium_district == "Thanh Xuân" %}
+    <h1>Quận Thanh Xuân</h1>
+{% elif all_stadium[0].stadium_district == "Cầu Giấy" %}
+    <h1>Quận Cầu Giấy</h1>
+{% elif all_stadium[0].stadium_district == "Nam Từ Liêm" %}
+    <h1>Quận Nam Từ Liêm</h1>
+{% endif %}
+    
 {% for all_stadiums in all_stadium %}
     <b>Ten:</b> {{all_stadiums.stadium_name }} <br>
     <b>dia chi:</b> {{all_stadiums.stadium_address }} <br>
