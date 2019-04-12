@@ -54,9 +54,9 @@ def login():
 
 @app.route("/dang-ki", methods = ["GET","POST"])
 def register():
-    user_infomation = user_collection.find()
+    user_information = user_collection.find()
     noti = str("")
-    for user_infomations in user_infomation:
+    for user_informations in user_information:
         if request.method == "GET":
             return render_template("register.html")
         elif request.method == "POST":
@@ -66,10 +66,10 @@ def register():
             email = form["email"]
             password = form["password"] 
             re_passwork = form["repassword"]
-            if phone == user_infomations["phone"]: 
+            if phone == user_informations["phone"]: 
                 noti = "Số Điện Thoại đã được đăng kí"
                 return render_template("register.html", noti = noti)
-            elif email == user_infomations["email"]:
+            elif email == user_informations["email"]:
                 noti = "Email đã được đăng kí"
                 return render_template("register.html", noti = noti)
             elif password != re_passwork:
