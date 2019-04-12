@@ -12,15 +12,15 @@ def homepage():
 @app.route("/san-bong")
 def all_stadium():
     all_stadium = stadium_collection.find()
-    return render_template('all_stadium.html', all_stadium = all_stadium)
+    return render_template('detail_district.html', all_stadium = all_stadium)
 
 @app.route("/san-bong/<stadium_district>")
 def detail_district(stadium_district):
-    all_stadium = stadium_collection.find({"stadium_district": stadium_district})
-    return render_template('all_stadium.html', all_stadium = all_stadium )
+    detail_district = stadium_collection.find({"stadium_district": stadium_district})
+    return render_template('detail_district.html', detail_district = detail_district)
     
-@app.route("/san-bong/detail/<id>")
-def detail_stadium(id):
+@app.route("/san-bong/<stadium_district>/<id>")
+def detail_stadium(stadium_district,id):
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     return render_template("detail_stadium.html", detail_stadium = detail_stadium)
 
