@@ -52,10 +52,12 @@ def booking_form(id):
             "stadium_price": stadium_price
         }
         form_collection.insert_one(new_form)
-        send_mail(customer_name, customer_phone, customer_email, stadium_district, stadium_name,stadium_email, book_date, book_time)
+        send_mail(customer_name, customer_phone, customer_email, stadium_district, stadium_name, stadium_email, book_date, book_time)
 
         return redirect("/dang-ky-thanh-cong")
-
+@app.route('/dang-ky-thanh-cong')
+def confirmation_booking():
+    return render_template('confirmation_booking.html')
     
 @app.route("/dang-nhap", methods = ["GET","POST"])
 def login():
