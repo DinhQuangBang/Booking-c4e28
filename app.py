@@ -54,14 +54,36 @@ def login():
 
 @app.route("/dang-ki", methods = ["GET","POST"])
 def register():
-    # if not session["logged"]: #chua dang nhap
+    user_infomation = user_collection.find()
+    noti = str("")
+    for user_infomations in user_infomation:
         if request.method == "GET":
             return render_template("register.html")
         elif request.method == "POST":
             form = request.form
-            username = form["username"]
-            password = form["password"]  
-            return redirect("/all-service")
+            name = form["name"]
+            phone = form["phone"]
+            email = form["email"]
+            password = form["password"] 
+            re_passwork = form["repassword"]
+            if phone == user_infomations["phone"]: 
+                noti = "Số Điện Thoại đã được đăng kí"
+                return render_template("register.html", noti = noti)
+            elif email == user_infomations["email"]:
+                noti = "Email đã được đăng kí"
+                return render_template("register.html", noti = noti)
+            elif password != re_passwork:
+                noti = "Mật khẩu không trùng nhau" 
+                return render_template("register.html", noti = noti)
+            else:
+                new_user = {
+                    'name': name,
+                    'phone': phone,
+                    'email': email,
+                    'password': password,
+                }
+                user_collection.insert_one(new_user)
+                return redirect("/dang-nhap")
     
 
 if __name__ == '__main__':
