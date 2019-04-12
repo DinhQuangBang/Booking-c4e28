@@ -34,7 +34,34 @@ def booking_form():
         customer_phone = form['phone']
         customer_email = form['email']
         return redirect("detail_stadium.html")
+    
+@app.route("/dang-nhap", methods = ["GET","POST"])
+def login():
+    # if not session["logged"]: #chua dang nhap
+        if request.method == "GET":
+            return render_template("login.html")
+        elif request.method == "POST":
+            form = request.form
+            username = form["username"]
+            password = form["password"]
+            # if username == "adminc4e" and password == "adminc4e":
+                # session["logged"] = True
+            return redirect("/")
+    #         else:
+    #             return redirect("/login")
+    # else: #dang nhap roi
+    #     return redirect("/all-service")
 
+@app.route("/dang-ki", methods = ["GET","POST"])
+def register():
+    # if not session["logged"]: #chua dang nhap
+        if request.method == "GET":
+            return render_template("register.html")
+        elif request.method == "POST":
+            form = request.form
+            username = form["username"]
+            password = form["password"]  
+            return redirect("/all-service")
     
 
 if __name__ == '__main__':
