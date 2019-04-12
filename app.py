@@ -37,25 +37,31 @@ def booking_form():
     
 @app.route("/dang-nhap", methods = ["GET","POST"])
 def login():
-    # if not session["logged"]: #chua dang nhap
+    noti = str("")
+    user_information = user_collection.find()
+    for user_informations in user_information:
         if request.method == "GET":
             return render_template("login.html")
         elif request.method == "POST":
             form = request.form
-            username = form["username"]
+            phone = form["phone"]
             password = form["password"]
-            # if username == "adminc4e" and password == "adminc4e":
-                # session["logged"] = True
-            return redirect("/")
-    #         else:
-    #             return redirect("/login")
-    # else: #dang nhap roi
-    #     return redirect("/all-service")
-
+            if phone == user_informations["phone"]: 
+                user_detail = user_collection.find_one({"phone":phone})
+                if password == user_detail["password"]:
+                    return redirect("/")
+                else:
+                    noti = "Sai Mật Khẩu"
+                    return render_template("login.html", noti = noti)
+            elif phone != user_informations["phone"]:
+                noti = "Số Điện Thoại không tồn tại"
+                return render_template("login.html", noti = noti)
+                
+            
 @app.route("/dang-ki", methods = ["GET","POST"])
 def register():
-    user_information = user_collection.find()
     noti = str("")
+    user_information = user_collection.find()
     for user_informations in user_information:
         if request.method == "GET":
             return render_template("register.html")
@@ -84,6 +90,10 @@ def register():
                 }
                 user_collection.insert_one(new_user)
                 return redirect("/dang-nhap")
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
     
 
 if __name__ == '__main__':
