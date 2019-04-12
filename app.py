@@ -1,5 +1,5 @@
 from flask import *
-from database import stadium_collection
+from database import stadium_collection, user_collection
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
