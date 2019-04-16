@@ -1,9 +1,10 @@
 from flask import *
-from database import stadium_collection, user_collection
+from database import stadium_collection, user_collection, form_collection
 from bson.objectid import ObjectId
+from def_function import *
 
 app = Flask(__name__)
-
+app.config["SECRET_KEY"] = "fj39#@32F><@#.f3fe:#$P3"
 
 @app.route("/")
 def homepage():
@@ -24,17 +25,43 @@ def detail_stadium(stadium_district,id):
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     return render_template("detail_stadium.html", detail_stadium = detail_stadium)
 
-@app.route("/dat-san/<id>", methods = ["GET","POST"])
+@app.route("/dang-ky-dat-san/<id>", methods = ["GET","POST"])
 def booking_form(id):
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     if request.method == "GET":
         return render_template("booking_form.html", detail_stadium = detail_stadium)
     elif request.method == "POST":
         form = request.form
-        customer_name = form['name']
-        customer_phone = form['phone']
-        customer_email = form['email']
-        return redirect("detail_stadium.html")
+        customer_name = form["name"]
+        customer_phone = form["phone"]
+        customer_email = form["email"]
+        book_date = form["date"]
+        book_time = form["time"]
+        if book_time == "16:00-17:30":
+            price = "600.000vnđ"
+        elif book_time == "17:30-19:00" or book_time == "19:00-20:30":
+            price = "800.000vnđ"
+        elif book_time == '20:30-22:00':
+            price = "400.000vnđ"
+        else: 
+            price = "300.000vnđ"
+        new_form = {
+            "stadium_name": detail_stadium["stadium_name"],
+            "stadium_address": detail_stadium["stadium_address"],
+            "customer_name": customer_name,
+            "customer_phone": customer_phone,
+            "customer_email": customer_email,
+            "book_date": book_date,
+            "book_time": book_time,
+            "stadium_price": price,
+        }
+        form_collection.insert_one(new_form)
+        # send_mail(customer_name, customer_phone, customer_email, stadium_name, stadium_address, book_date, book_time)
+
+        return redirect("/dang-ky-thanh-cong")
+@app.route('/dang-ky-thanh-cong')
+def confirmation_booking():
+    return render_template('confirmation_booking.html')
     
 @app.route("/dang-nhap", methods = ["GET","POST"])
 def login():
@@ -50,14 +77,14 @@ def login():
             if phone == user_informations["phone"]: 
                 user_detail = user_collection.find_one({"phone":phone})
                 if password == user_detail["password"]:
-                    return redirect("/")
-                else:
-                    noti = "Sai Mật Khẩu"
-                    return render_template("login.html", noti = noti)
-            elif phone != user_informations["phone"]:
-                noti = "Số Điện Thoại không tồn tại"
+                    return render_template("login.html", logged = logged)
+            else:
+                noti = "Sai Mật Khẩu"
                 return render_template("login.html", noti = noti)
-                
+        elif phone != user_informations["phone"]:
+            noti = "Số Điện Thoại không tồn tại"
+            return render_template("login.html", noti = noti)
+           
             
 @app.route("/dang-ki", methods = ["GET","POST"])
 def register():
@@ -92,9 +119,10 @@ def register():
                 user_collection.insert_one(new_user)
                 return redirect("/dang-nhap")
 
+@app.route("/logout")
+def logout():
+    logged = False 
+    return redirect("/")
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-    
-

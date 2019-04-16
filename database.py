@@ -9,4 +9,3 @@ stadium_collection = stadium_database["stadium_detail"]
 user_database = client.user_database
 user_collection = user_database["user_information"]
 
-
