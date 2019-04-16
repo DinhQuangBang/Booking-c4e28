@@ -12,7 +12,7 @@
             <h3> Đăng Kí Đặt Sân </h3> <hr>
             {{detail_stadium.stadium_name}} <hr>
             {{detail_stadium.stadium_address}} <hr>
-            <input name="date" type="date"> <hr>
+            <input name="date" type="date"> <hr> 
             <label >Chọn Khung Giờ</label>
             <select name="time" id="select" class="form-control" onchange="singleSelectChangeValue()">
             <option value="6:00-7:30">6:00 - 7:30</option>
@@ -25,9 +25,9 @@
             <option value="19:00-20:30">19:00 - 20:30</option>
             <option value="20:30-22:00">20:30 - 22:00</option>
             </select> <hr>
-            <input name="name" type="text" placeholder="Họ Tên"> <hr>
-            <input name="phone" type="text" placeholder="Số Điện Thoại"> <hr>
-            <input name="email" type="email" placeholder="Email"> <hr>
+            <input name="name" type="text" placeholder="Họ Tên"> <hr> {{ noti }}
+            <input name="phone" type="tel" placeholder="Số Điện Thoại"> <hr> {{ noti }}
+            <input name="email" type="email" placeholder="Email"> <hr> {{ noti }}
             <button>Đăng kí đặt</button> <hr>
         </form>
         <input type="text" id="textFieldValueJS" class="form-control" placeholder="get value on option select">

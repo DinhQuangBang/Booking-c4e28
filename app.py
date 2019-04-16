@@ -27,6 +27,7 @@ def detail_stadium(stadium_district,id):
 
 @app.route("/dang-ky-dat-san/<id>", methods = ["GET","POST"])
 def booking_form(id):
+    noti = str("")
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     if request.method == "GET":
         return render_template("booking_form.html", detail_stadium = detail_stadium)
@@ -45,20 +46,31 @@ def booking_form(id):
             price = "400.000vnđ"
         else: 
             price = "300.000vnđ"
-        new_form = {
-            "stadium_name": detail_stadium["stadium_name"],
-            "stadium_address": detail_stadium["stadium_address"],
-            "customer_name": customer_name,
-            "customer_phone": customer_phone,
-            "customer_email": customer_email,
-            "book_date": book_date,
-            "book_time": book_time,
-            "stadium_price": price,
-        }
-        form_collection.insert_one(new_form)
+
+        if customer_name == "":
+            noti = "Bạn chưa nhập tên"
+            return render_template("booking_form.html", noti = noti,detail_stadium = detail_stadium)
+        elif customer_phone == "":
+            noti = "Bạn chưa nhập số điện thoại"
+            return render_template("booking_form.html", noti = noti,detail_stadium = detail_stadium)    
+        elif customer_email == "":
+            noti = "Bạn chưa nhập Email"
+            return render_template("booking_form.html", noti = noti,detail_stadium = detail_stadium)
+        else:
+            new_form = {
+                "stadium_name": detail_stadium["stadium_name"],
+                "stadium_address": detail_stadium["stadium_address"],
+                "customer_name": customer_name,
+                "customer_phone": customer_phone,
+                "customer_email": customer_email,
+                "book_date": book_date,
+                "book_time": book_time,
+                "stadium_price": price,
+            }
+            form_collection.insert_one(new_form)
         # send_mail(customer_name, customer_phone, customer_email, stadium_name, stadium_address, book_date, book_time)
 
-        return redirect("/dang-ky-thanh-cong")
+            return redirect("/dang-ky-thanh-cong")
 @app.route('/dang-ky-thanh-cong')
 def confirmation_booking():
     return render_template('confirmation_booking.html')
@@ -77,7 +89,7 @@ def login():
             if phone == user_informations["phone"]: 
                 user_detail = user_collection.find_one({"phone":phone})
                 if password == user_detail["password"]:
-                    return render_template("login.html", logged = logged)
+                    return render_template("login.html")
             else:
                 noti = "Sai Mật Khẩu"
                 return render_template("login.html", noti = noti)
