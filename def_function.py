@@ -12,6 +12,13 @@ def send_mail(customer_name,customer_phone,customer_email,stadium_district,stadi
 
     Khách hàng: {1} đã đăng kí đặt sân {2} vào lúc {3} ngày {4} qua trang web sanphui.vn.
     Vui lòng gọi điện lại cho khách hàng theo số điện thoại: {5} để xác nhận lại.""".format(notification_subject, customer_name, stadium_name, book_time, book_date, customer_phone)
+    s.starttls()
+    s.login(mail_address, mail_password)
+    s.sendmail(mail_address, customer_email, confirmation_message.encode("utf8"))
+    s.sendmail(mail_address, stadium_email, notification_message.encode("utf8"))
+    s.quit()
+    
+def send_mail_partnership(partner_name, partner_phone, partner_email, partner_address, partner_note):
     s = smtplib.SMTP('smtp.gmail.com', 587)
     mail_address = "hainam110993@gmail.com"
     mail_password = "hainam12"
