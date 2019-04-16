@@ -1,5 +1,5 @@
 from flask import *
-from database import stadium_collection, user_collection, form_collection
+from database import stadium_collection, user_collection, form_collection, partnership_collection
 from bson.objectid import ObjectId
 from def_function import *
 
@@ -54,11 +54,37 @@ def booking_form(id):
         form_collection.insert_one(new_form)
         send_mail(customer_name, customer_phone, customer_email, stadium_district, stadium_name, stadium_email, book_date, book_time)
 
-        return redirect("/dang-ky-thanh-cong")
-        
-@app.route('/dang-ky-thanh-cong')
+        return redirect("/dat-lich-thanh-cong")
+
+@app.route('/dat-lich-thanh-cong')
 def confirmation_booking():
     return render_template('confirmation_booking.html')
+
+@app.route('/dang-ky-hop-tac', methods = ["GET","POST"])
+def partnership_register():
+    if request.method == "GET":
+        return render_template("partnership.html")
+    elif request.method == "POST":
+        form = request.form
+        partner_name = form["partner_name"]
+        partner_phone = form["partner_phone"]
+        partner_email = form["partner_email"]
+        partner_address = form["partner_address"]
+        partner_note = form["partner_note"]
+        new_form = {
+            "partner_name": partner_name,
+            "partner_email": partner_email,
+            "partner_phone": partner_phone,
+            "partner_address": partner_address,
+            "partner_note": partner_note
+        }
+        partnership_collection.insert_one(new_form)
+        send_mail_partnership(partner_name, partner_phone, partner_email, partner_address, partner_note)
+        return redirect('/dang-ky-thanh-cong')
+
+@app.route('/dang-ky-thanh-cong')
+def confirmation_registration():
+    return render_template('confirmation_registration.html')
     
 @app.route("/dang-nhap", methods = ["GET","POST"])
 def login():
