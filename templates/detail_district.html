@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,34 +26,4 @@
 {% endfor %}
 
 </body>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-
-{% if detail_district[0].stadium_district == "Hai Bà Trưng" %}
-    <h1>Quận Hai Bà Trưng</h1>
-{% elif detail_district[0].stadium_district == "Thanh Xuân" %}
-    <h1>Quận Thanh Xuân</h1>
-{% elif detail_district[0].stadium_district == "Cầu Giấy" %}
-    <h1>Quận Cầu Giấy</h1>
-{% elif detail_district[0].stadium_district == "Nam Từ Liêm" %}
-    <h1>Quận Nam Từ Liêm</h1>
-{% endif %}
-
-{% for detail_districts in detail_district %}
-    <b>Ten:</b> {{detail_districts.stadium_name }} <br>
-    <b>dia chi:</b> {{detail_districts.stadium_address }} <br>
-    <b>anh:</b> <img src="{{ detail_districts.stadium_image }}"> <br>
-    <a href="/san-bong/{{ detail_districts.stadium_district }}/{{ detail_districts._id }}"><button> chi tiết </button></a> <br>
-{% endfor %}
-
-</body>
->>>>>>> .
 </html>
