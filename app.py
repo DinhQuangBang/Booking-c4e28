@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import *
 from database import stadium_collection, user_collection, form_collection, partnership_collection
 from bson.objectid import ObjectId
