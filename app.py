@@ -76,7 +76,7 @@ def booking_form(id):
                 "stadium_price": price,
             }
             form_collection.insert_one(new_form)
-            send_mail(customer_name, customer_phone, customer_email, stadium_name, stadium_address, book_date, book_time)
+            send_mail(customer_name, customer_phone, customer_email, stadium_name, book_date, book_time, stadium_address)
             return redirect("/dat-lich-thanh-cong")
 
 @app.route('/dat-lich-thanh-cong')
