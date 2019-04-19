@@ -5,6 +5,7 @@ def send_mail(customer_name,customer_phone,customer_email,stadium_district,stadi
     mail_password = "hainam12"
     confirmation_subject = "Xác nhận đăng kí đặt sân {0} vào lúc {1} ngày {2}".format(stadium_name, book_time, book_date)
     confirmation_message = """Subject: {0}
+
     Trang web: sanphui.vn xác nhận quý khách: {1} đã đăng kí đặt hẹn sân {2} vào lúc {3} ngày {4}. 
     Nhân viên của sân {2} sẽ sớm liên hệ cho quý khách.""".format(confirmation_subject, customer_name, stadium_name, book_time, book_date)
     notification_subject = "Đăng kí đặt sân của khách {0} vào lúc {1} ngày {2}".format(customer_name, book_time, book_date)
@@ -33,5 +34,5 @@ def send_mail_partnership(partner_name, partner_phone, partner_email, partner_ad
     Ghi chú: {5}""".format(partnership_subject, partner_name, partner_phone, partner_email, partner_address, partner_note)
     s.starttls()
     s.login(mail_address, mail_password)
-    s.sendmail(mail_address, mail_address, confirmation_message.encode("utf8"))
+    s.sendmail(mail_address, partner_email, confirmation_message.encode("utf8"))
     s.quit()
