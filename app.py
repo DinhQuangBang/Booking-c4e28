@@ -38,6 +38,8 @@ def booking_form(id):
         customer_email = form["email"]
         book_date = form["date"]
         book_time = form["time"]
+        stadium_name = detail_stadium["stadium_name"]
+        stadium_address = detail_stadium["stadium_address"]
         if book_time == "16:00-17:30":
             price = "600.000vnđ"
         elif book_time == "17:30-19:00" or book_time == "19:00-20:30":
@@ -64,8 +66,8 @@ def booking_form(id):
             return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
         else:
             new_form = {
-                "stadium_name": detail_stadium["stadium_name"],
-                "stadium_address": detail_stadium["stadium_address"],
+                "stadium_name": stadium_name,
+                "stadium_address": stadium_address,
                 "customer_name": customer_name,
                 "customer_phone": customer_phone,
                 "customer_email": customer_email,
@@ -74,8 +76,7 @@ def booking_form(id):
                 "stadium_price": price,
             }
             form_collection.insert_one(new_form)
-            # send_mail(customer_name, customer_phone, customer_email, stadium_name, stadium_address, book_date, book_time)
-
+            send_mail(customer_name, customer_phone, customer_email, stadium_name, stadium_address, book_date, book_time)
             return redirect("/dat-lich-thanh-cong")
 
 @app.route('/dat-lich-thanh-cong')

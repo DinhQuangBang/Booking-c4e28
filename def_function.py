@@ -1,5 +1,5 @@
 import smtplib
-def send_mail(customer_name,customer_phone,customer_email,stadium_district,stadium_name, book_date, book_time, stadium_email):
+def send_mail(customer_name,customer_phone,customer_email,stadium_name, book_date, book_time, stadium_email):
     s = smtplib.SMTP('smtp.gmail.com', 587)
     mail_address = "hainam110993@gmail.com"
     mail_password = "hainam12"
