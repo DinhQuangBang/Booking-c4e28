@@ -26,7 +26,7 @@
             <option value="20:30-22:00">20:30 - 22:00</option>
             </select> <hr>
             <input name="name" type="text" placeholder="Họ Tên"> <hr> 
-            <input name="phone" type="tel" placeholder="Số Điện Thoại"> <hr> 
+            <input pattern="[0-9]{10}" name="phone" type="tel" placeholder="Số Điện Thoại"> <hr> 
             <input name="email" type="email" placeholder="Email"> <hr> 
             <button>Đăng kí đặt</button> <hr>
             {{ noti }}
