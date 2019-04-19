@@ -19,15 +19,16 @@
            </ul>
         </header>
      </nav>
-    <form method="POST">
+    <form id="form_register" method="POST">
         <h3>Đăng Kí</h3>
-        <input name="name" type="text" placeholder="Họ Tên"> <br>
+        <div class="input1">
+        <input name="name" type="text" placeholder="Họ tên"> <br>
         <input name="phone" type="text" placeholder="Số điện thoại"> <br>
-        <input name="email" type="text" placeholder="Email"> <br>
+        <input name="email" type="email" placeholder="Email"> <br>
         <input name="password" type="password" placeholder="Password">  <br>
         <input name="repassword" type="password" placeholder="Nhập Lại Password"> <br>
         <button>Đăng Kí</button> <br>
-        {{ noti }}
-    </form>    
+        </div>
+    </form>
 </body>
 </html>
