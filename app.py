@@ -27,34 +27,56 @@ def detail_stadium(stadium_district,id):
 
 @app.route("/dang-ky-dat-san/<id>", methods = ["GET","POST"])
 def booking_form(id):
+    noti = str("")
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     if request.method == "GET":
         return render_template("booking_form.html", detail_stadium = detail_stadium)
     elif request.method == "POST":
         form = request.form
-        customer_name = form["customer_name"]
-        customer_phone = form["customer_phone"]
-        customer_email = form["customer_email"]
-        stadium_district = detail_stadium["stadium_district"]
-        stadium_name = detail_stadium["stadium_name"]
-        book_date = form["book_date"]
-        book_time = form["book_time"]
-        stadium_price = form["stadium_price"]
-        stadium_email = detail_stadium["stadium_email"]
-        new_form = {
-            "customer_name": customer_name,
-            "customer_phone": customer_phone,
-            "customer_email": customer_email,
-            "stadium_district": stadium_district,
-            "stadium_name": stadium_name,
-            "book_date": book_date,
-            "book_time": book_time,
-            "stadium_price": stadium_price
-        }
-        form_collection.insert_one(new_form)
-        send_mail(customer_name, customer_phone, customer_email, stadium_district, stadium_name, stadium_email, book_date, book_time)
+        customer_name = form["name"]
+        customer_phone = form["phone"]
+        customer_email = form["email"]
+        book_date = form["date"]
+        book_time = form["time"]
+        if book_time == "16:00-17:30":
+            price = "600.000vnđ"
+        elif book_time == "17:30-19:00" or book_time == "19:00-20:30":
+            price = "800.000vnđ"
+        elif book_time == '20:30-22:00':
+            price = "400.000vnđ"
+        else: 
+            price = "300.000vnđ"
 
-        return redirect("/dat-lich-thanh-cong")
+        if book_date == "":
+            noti = "Bạn chưa chọn Ngày"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif book_time == "0":
+            noti = "Bạn chưa chọn Thời Gian"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif customer_name == "":
+            noti = "Bạn chưa nhập Tên"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif customer_phone == "":
+            noti = "Bạn chưa nhập Số Điện Thoại"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif customer_email == "":
+            noti = "Bạn chưa nhập Email"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        else:
+            new_form = {
+                "stadium_name": detail_stadium["stadium_name"],
+                "stadium_address": detail_stadium["stadium_address"],
+                "customer_name": customer_name,
+                "customer_phone": customer_phone,
+                "customer_email": customer_email,
+                "book_date": book_date,
+                "book_time": book_time,
+                "stadium_price": price,
+            }
+            form_collection.insert_one(new_form)
+            # send_mail(customer_name, customer_phone, customer_email, stadium_name, stadium_address, book_date, book_time)
+
+            return redirect("/dat-lich-thanh-cong")
 
 @app.route('/dat-lich-thanh-cong')
 def confirmation_booking():
