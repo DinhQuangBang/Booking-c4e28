@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="../static/css/style.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
-     <form class="box" action="login.html" method="POST">
-		 <div class="title">
-			 <h1> LOGIN </h1>
-		 </div>
-		 <div class="aa">
-			 <input placeholder="Username" name="" type="text">
-			 <input placeholder="Password" name="" type="password">
-		 </div>
-		 <div>
-			 <input type="Submit" name="" value="Login">
-		 </div>
-	 </form>
+    <form method="POST">
+        <h3>Đăng Nhập</h3>
+        <input name="phone" type="text" placeholder="Số điện thoại"> <br>
+        <input name="password" type="password" placeholder="Password">  <br>
+        <button>Đăng Nhập</button> <br>
+        {{ noti }}
 </body>
 </html>

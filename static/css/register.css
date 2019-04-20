@@ -1,3 +1,83 @@
+#fixNav{
+      z-index: 99;
+      width: 100%;
+      height: 10%;
+      background-color:  rgb(1, 7, 43);
+      display: inline-block; 
+      margin-right: 100px;
+      position: fixed; /*Cho menu cố định 1 vị trí với top và left*/
+      top: 0; /*Nằm trên cùng*/
+      left: 0; /*Nằm sát bên trái*/
+      
+  }
+  
+  /* Logo trong hộp */
+.logo{
+      width: 40%;
+      float: left;
+      margin-left: 8%;
+      margin-top: 1.5%;
+      color: whitesmoke;
+      font-family: 'Faster One' ;
+  }
+  
+   
+#fixNav ul{
+      margin: 0;
+      padding: 0;
+      float: right;
+      margin-right: 13%;
+      margin-top: 25px;
+  }
+  
+#fixNav ul li {
+      list-style:none inside; 
+      width: auto;
+      float: left;
+      color: #fff;
+      padding: 0;
+      margin-right: 10px;
+      position: relative;
+      font-family: 'Roboto', sans-serif;
+  }
+  
+#fixNav ul li a{
+      
+      white-space: nowrap; /*Cho chữ trong menu không bị wrap*/
+      padding: 0 10px;
+      color: #fff;
+      display: flexbox;
+      font-size: 120%;
+      font-weight: 10%;
+      text-decoration: none;
+  }
+    /*CSS Style cho Submenu*/
+#fixNav ul li ul {
+      position: absolute; 
+      width: 200%;
+      display: none;
+      background-color: rgb(0, 124, 37);
+      border-bottom: 100% solid #0082bb;
+      padding-left: 80%;
+  }
+    
+#fixNav ul li ul li{
+      display: block;
+      padding: 10%;
+      margin: 50%;
+      /* float: none; Bỏ float cho li cấp thứ 2 */
+    }
+    /* Hover cho submenu */
+#fixNav ul li:hover {
+      /* Hover thì li sẽ đổi màu*/
+      
+      background-color: grey;
+    }
+#fixNav ul li:hover ul{
+      /*Display ra submenu*/
+      display: block;
+  }
+
 h3 {
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -47,3 +127,7 @@ button {
     color: wheat;
     background-color: #2A363B;
     }
+
+button:hover, a:active {
+    background-color: gray;
+}

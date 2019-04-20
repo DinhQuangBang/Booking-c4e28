@@ -1,8 +1,9 @@
 from flask import *
-from database import stadium_collection, user_collection
+from database import stadium_collection, user_collection, form_collection, partnership_collection
 from bson.objectid import ObjectId
+from def_function import *
 
-app = Flask(__name__) 
+app = Flask(__name__)
 
 
 @app.route("/")
@@ -24,16 +25,90 @@ def detail_stadium(stadium_district,id):
     detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     return render_template("detail_stadium.html", detail_stadium = detail_stadium)
 
-@app.route("/dat-san", methods = ["GET","POST"])
-def booking_form():
+@app.route("/dang-ky-dat-san/<id>", methods = ["GET","POST"])
+def booking_form(id):
+    noti = str("")
+    detail_stadium = stadium_collection.find_one({"_id": ObjectId(id)})
     if request.method == "GET":
-        return render_template("booking_form.html")
+        return render_template("booking_form.html", detail_stadium = detail_stadium)
     elif request.method == "POST":
         form = request.form
-        customer_name = form['name']
-        customer_phone = form['phone']
-        customer_email = form['email']
-        return redirect("detail_stadium.html")
+        customer_name = form["name"]
+        customer_phone = form["phone"]
+        customer_email = form["email"]
+        book_date = form["date"]
+        book_time = form["time"]
+        stadium_name = detail_stadium["stadium_name"]
+        stadium_address = detail_stadium["stadium_address"]
+        stadium_email = detail_stadium["stadium_email"]
+        if book_time == "16:00-17:30":
+            price = "600.000vnđ"
+        elif book_time == "17:30-19:00" or book_time == "19:00-20:30":
+            price = "800.000vnđ"
+        elif book_time == '20:30-22:00':
+            price = "400.000vnđ"
+        else: 
+            price = "300.000vnđ"
+
+        if book_date == "":
+            noti = "Bạn chưa chọn Ngày"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif book_time == "0":
+            noti = "Bạn chưa chọn Thời Gian"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif customer_name == "":
+            noti = "Bạn chưa nhập Tên"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif customer_phone == "":
+            noti = "Bạn chưa nhập Số Điện Thoại"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        elif customer_email == "":
+            noti = "Bạn chưa nhập Email"
+            return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
+        else:
+            new_form = {
+                "stadium_name": stadium_name,
+                "stadium_address": stadium_address,
+                "customer_name": customer_name,
+                "customer_phone": customer_phone,
+                "customer_email": customer_email,
+                "book_date": book_date,
+                "book_time": book_time,
+                "stadium_price": price,
+            }
+            form_collection.insert_one(new_form)
+            send_mail(customer_name, customer_phone, customer_email, stadium_name, book_date, book_time, stadium_email)
+            return redirect("/dat-lich-thanh-cong")
+
+@app.route('/dat-lich-thanh-cong')
+def confirmation_booking():
+    return render_template('confirmation_booking.html')
+
+@app.route('/dang-ky-hop-tac', methods = ["GET","POST"])
+def partnership_register():
+    if request.method == "GET":
+        return render_template("partnership.html")
+    elif request.method == "POST":
+        form = request.form
+        partner_name = form["partner_name"]
+        partner_phone = form["partner_phone"]
+        partner_email = form["partner_email"]
+        partner_address = form["partner_address"]
+        partner_note = form["partner_note"]
+        new_form = {
+            "partner_name": partner_name,
+            "partner_email": partner_email,
+            "partner_phone": partner_phone,
+            "partner_address": partner_address,
+            "partner_note": partner_note
+        }
+        partnership_collection.insert_one(new_form)
+        send_mail_partnership(partner_name, partner_phone, partner_email, partner_address, partner_note)
+        return redirect('/dang-ky-thanh-cong')
+
+@app.route('/dang-ky-thanh-cong')
+def confirmation_registration():
+    return render_template('confirmation_registration.html')
     
 @app.route("/dang-nhap", methods = ["GET","POST"])
 def login():
