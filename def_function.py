@@ -6,12 +6,12 @@ def send_mail(customer_name,customer_phone,customer_email,stadium_name, book_dat
     confirmation_subject = "Xác nhận đăng kí đặt sân {0} vào lúc {1} ngày {2}".format(stadium_name, book_time, book_date)
     confirmation_message = """Subject: {0}
 
-    Trang web: sanphui.vn xác nhận quý khách: {1} đã đăng kí đặt hẹn sân {2} vào lúc {3} ngày {4}. 
+    Trang web: sanphui.vn xác nhận quý khách: {1} đã đăng kí đặt hẹn {2} vào lúc {3} ngày {4}. 
     Nhân viên của sân {2} sẽ sớm liên hệ cho quý khách.""".format(confirmation_subject, customer_name, stadium_name, book_time, book_date)
     notification_subject = "Đăng kí đặt sân của khách {0} vào lúc {1} ngày {2}".format(customer_name, book_time, book_date)
     notification_message = """Subject: {0}
 
-    Khách hàng: {1} đã đăng kí đặt sân {2} vào lúc {3} ngày {4} qua trang web sanphui.vn.
+    Khách hàng: {1} đã đăng kí đặt {2} vào lúc {3} ngày {4} qua trang web sanphui.vn.
     Vui lòng gọi điện lại cho khách hàng theo số điện thoại: {5} để xác nhận lại.""".format(notification_subject, customer_name, stadium_name, book_time, book_date, customer_phone)
     s.starttls()
     s.login(mail_address, mail_password)

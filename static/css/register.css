@@ -77,7 +77,10 @@
       /*Display ra submenu*/
       display: block;
   }
-
+body {
+    background-image: url('/New/static/img/background.png');
+    background-size: cover;
+}
 h3 {
     font-family: 'Roboto', sans-serif;
     text-align: center;

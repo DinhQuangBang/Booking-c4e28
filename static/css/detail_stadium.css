@@ -77,11 +77,9 @@
       /*Display ra submenu*/
       display: block;
   }
-
-
-
 body {
     background-image: url('/New/static/img/background.png');
+    background-size: cover;
 }
 button {
     font-family: 'Roboto', sans-serif;
