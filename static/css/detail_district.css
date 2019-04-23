@@ -138,6 +138,8 @@ body {
 }
 
 .ten {
+      margin-top: 20px;
+      font-size: 18px;
       display: flex;
       justify-content: space-around;
 }
