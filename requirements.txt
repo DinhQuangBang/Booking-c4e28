@@ -4,6 +4,7 @@
 flask
 flask-restful
 flask-socketio
+flask-email
 
 
 # ----------------------
@@ -16,6 +17,7 @@ mongoengine
 # ----------------------
 eventlet
 gunicorn
+SMTP protocol client
 
 
 # ----------------------
@@ -23,3 +25,4 @@ gunicorn
 # ----------------------
 addict
 shortuuid
+
