@@ -1,3 +1,4 @@
+
 #fixNav{
       z-index: 99;
       width: 100%;
@@ -79,18 +80,20 @@
   }
 
 body {
-    background-image: url('/New/static/img/background.png');
-    background-size: cover;
+    background-image: url('/static/image/background.png');
+    /* background-size: cover;  */
+    margin-top: 0;
 }
 
-h3 {
+h2 {
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    color: black;
-    font-size: 20px;
-    }
+    color: red;
+    
+}
 
 input {
+    outline: none;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     align-items: center;
@@ -104,21 +107,22 @@ input {
     }
 
 #form_register {
-    background-image: url('/New/static/img/Web\ 1920\ –\ 1.png');
-    background-size: cover;
     font-family: 'Roboto', sans-serif;
     position: absolute;
-    top: 15%;
+    top: 30%;
     height: 99%;
     width: 99%;
 }
 
 .input1{
+    outline: none;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     }
 
 button {
+    
+    outline: none;
     font-family: 'Roboto', sans-serif;
     align-items: center;
     border-style:hidden;
@@ -136,3 +140,4 @@ button {
 button:hover, a:active {
     background-color: gray;
 }
+

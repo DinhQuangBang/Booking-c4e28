@@ -36,3 +36,4 @@ def send_mail_partnership(partner_name, partner_phone, partner_email, partner_ad
     s.login(mail_address, mail_password)
     s.sendmail(mail_address, partner_email, confirmation_message.encode("utf8"))
     s.quit()
+

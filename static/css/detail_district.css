@@ -92,7 +92,7 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 80px;
+      margin-top: 8%;
       font-family: 'roboto';
 }
 
@@ -140,29 +140,4 @@ body {
 .ten {
       display: flex;
       justify-content: space-around;
-      /* margin-top: 300%;
-      margin-left: -550%; */
 }
-
-/* .image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      /* background-color: rgb(133, 128, 128);
-    
-}
-
-.img {
-      width: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-left: 10px;
-}
-
-.ten {
-     
-      margin-top: 30%;
-} */
-
-

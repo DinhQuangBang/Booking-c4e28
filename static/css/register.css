@@ -77,8 +77,9 @@
       /*Display ra submenu*/
       display: block;
   }
+
 body {
-    background-image: url('/New/static/img/background.png');
+    background-image: url('/static/image/background.png');
     background-size: cover;
 }
 h3 {
@@ -89,6 +90,7 @@ h3 {
     }
 
 input {
+    outline: none;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     align-items: center;
@@ -112,11 +114,13 @@ input {
 }
 
 .input1{
+    outline: none;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     }
 
 button {
+    outline: none;
     font-family: 'Roboto', sans-serif;
     align-items: center;
     border-style:hidden;

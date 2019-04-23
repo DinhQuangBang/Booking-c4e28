@@ -52,6 +52,7 @@ def booking_form(id):
 
         if book_date == "":
             noti = "Bạn chưa chọn Ngày"
+            
             return render_template("booking_form.html", noti = noti, detail_stadium = detail_stadium)
         elif book_time == "0":
             noti = "Bạn chưa chọn Thời Gian"
@@ -90,20 +91,20 @@ def partnership_register():
         return render_template("partnership.html")
     elif request.method == "POST":
         form = request.form
-        partner_name = form["partner_name"]
-        partner_phone = form["partner_phone"]
-        partner_email = form["partner_email"]
-        partner_address = form["partner_address"]
-        partner_note = form["partner_note"]
+        partner_name = form["name"]
+        partner_phone = form["phone"]
+        partner_email = form["email"]
+        partner_address = form["address"]
+        partner_note = form["note"]
         new_form = {
             "partner_name": partner_name,
             "partner_email": partner_email,
             "partner_phone": partner_phone,
             "partner_address": partner_address,
-            "partner_note": partner_note
+            "partner_note": partner_note,
         }
         partnership_collection.insert_one(new_form)
-        send_mail_partnership(partner_name, partner_phone, partner_email, partner_address, partner_note)
+        send_mail_partnership (partner_name, partner_phone ,partner_email, partner_address, partner_note)
         return redirect('/dang-ky-thanh-cong')
 
 @app.route('/dang-ky-thanh-cong')

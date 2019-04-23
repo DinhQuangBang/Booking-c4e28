@@ -1,42 +1,60 @@
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link href="/static/css/booking_form.css" rel="stylesheet">
+    <title>Đăng Kí Đặt Sân</title>
 </head>
 <body>
-        <form method="POST">
-            <h3> Đăng Kí Đặt Sân </h3> <hr>
-            {{detail_stadium.stadium_name}} <hr>
-            {{detail_stadium.stadium_address}} <hr>
-            <input name="date" type="date"> <hr> 
-            <label >Chọn Khung Giờ</label>
-            <select name="time" id="select" class="form-control" onchange="singleSelectChangeValue()">
-            <option value="6:00-7:30">6:00 - 7:30</option>
-            <option value="7:30-9:00">7:30 - 9:00</option>
-            <option value="9:00-10:30">9:00 - 10:30</option>
-            <option value="13:00-14:30">13:00 - 14:30</option>
-            <option value="14:30-16:00">14:30 - 16:00</option>
-            <option value="16:00-17:30">16:00 - 17:30</option>
-            <option value="17:30-19:00">17:30 - 19:00</option>
-            <option value="19:00-20:30">19:00 - 20:30</option>
-            <option value="20:30-22:00">20:30 - 22:00</option>
-            </select> <hr>
-            <input name="name" type="text" placeholder="Họ Tên"> <hr> 
-            <input pattern="[0-9]{10}" name="phone" type="tel" placeholder="Số Điện Thoại"> <hr> 
-            <input name="email" type="email" placeholder="Email"> <hr> 
-            <button>Đăng kí đặt</button> <hr>
-            {{ noti }}
+        <div>
+                <nav id="fixNav">
+                        <h1 class="logo"> S  A  N   P  H  U  I .  V  N</h1>
+                    <header>
+                     <ul>
+                         <li> <a href="/"> Trang chủ </a> </li>
+                         <li> <a href="/dang-ky-hop-tac"> Liên hệ hợp tác </a></li>
+                         <li> <a href="http://thegioibongda.net/"> SHOP </a></li>
+                     </ul>
+                    </header>
+                 </nav>
+        </div>
+        <form id="form_register" method="POST">
+            <h3> Đăng Kí Đặt Sân </h3> </br>
+            <div id="info">
+            {{detail_stadium.stadium_name}} </br>
+            {{detail_stadium.stadium_address}} </br>
+            <b style = "color: red"> {{noti}}</b>
+            </div>
+            <div id="input1">
+                <div id="time">
+                <label >Chọn Khung Giờ</label>
+                <select name="time" id="select" class="form-control" onchange="singleSelectChangeValue()">
+                <option value="6:00-7:30">6:00 - 7:30</option>
+                <option value="7:30-9:00">7:30 - 9:00</option>
+                <option value="9:00-10:30">9:00 - 10:30</option>
+                <option value="13:00-14:30">13:00 - 14:30</option>
+                <option value="14:30-16:00">14:30 - 16:00</option>
+                <option value="16:00-17:30">16:00 - 17:30</option>
+                <option value="17:30-19:00">17:30 - 19:00</option>
+                <option value="19:00-20:30">19:00 - 20:30</option>
+                <option value="20:30-22:00">20:30 - 22:00</option>
+                </select> </br>
+                </div>
+            <input name="date" type="date"> </br>
+            <input name="name" type="text" placeholder="Họ Tên">  </br>
+            <input name="phone" type="tel" placeholder="Số Điện Thoại"> </br>
+            <input name="email" type="email" placeholder="Email">  </br>
+            <button>Đăng kí đặt</button>
+            </div>
         </form>
-        <input type="text" id="textFieldValueJS" class="form-control" placeholder="get value on option select">
 <script>
     
 function singleSelectChangeValue() {
         //Getting Value
-<<<<<<< HEAD
         //METHOD 2
         var selObj = document.getElementById("select");
         var selValue = selObj.options[selObj.selectedIndex].value;
@@ -47,22 +65,3 @@ function singleSelectChangeValue() {
     
 </body>
 </html
-=======
-
-        
-
-       
-        //METHOD 2
-        var selObj = document.getElementById("select");
-
-        var selValue = selObj.options[selObj.selectedIndex].value;
-
-        //Setting Value
-        document.getElementById("textFieldValueJS").value = selValue;
-    }
-
-</script>
-    
-</body>
-</html
->>>>>>> ab611492cd5e4ba6879cc91464f06c61451073ce
