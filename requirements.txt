@@ -16,6 +16,7 @@ mongoengine
 # ----------------------
 eventlet
 gunicorn
+smtplib
 
 # ----------------------
 # Others
